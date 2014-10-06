@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Go &amp; Aptly - A quick start guide</title>
+
+		<meta name="description" content="How to get ready to develop amazing aptly features ">
+		<meta name="author" content="Simon Aquino">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section>
+        <h1>Go and Aptly</h1>
+					<h3>Open, mix and serve cold</h3>
+					<p>
+						<small>Created by Simon Aquino</small>
+					</p>
+				</section>
+    
+        <section data-background="darkslateblue">
+          <section>
+            <h1>Contents &amp; Outcomes</h1>
+          </section>
+
+          <section>
+          <h2>How do I Go?</h2>
+          <ul>
+            <li class="fragment">Objective vs Opinionated?</li>
+            <li class="fragment">So many guides telling you how to use Go</li>
+            <li class="fragment">Will be as much subjective as possible</li>
+            <li class="fragment">Highlight interesting features, quicky go over the most boring ones</li>
+            <li class="fragment">Get you ready to develop your own aptly features...
+            <p class="fragment roll-in">...if I don't manage to scare you off!</p></li>
+          </ul>
+
+          </section>
+
+          <section>
+            <h2>Overview about Go</h2>
+            <ul>
+              <li class="fragment">Origins, <b class="fragment roll-in">life </b><b class="fragment roll-in">and miracles</b></li>
+              <li class="fragment">Variables and Types</li>
+              <li class="fragment">Control structures (<b class="fragment roll-in">for, </b><b class="fragment roll-in">if, </b><b class="fragment roll-in">switch</b>)</li>
+              <li class="fragment">Array, Slices and Maps</li>
+              <li class="fragment">Structs and Interfaces</li>
+              <li class="fragment">Pointers</li>
+              <li class="fragment">Concurrency</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Overview about Aptly</h2>
+            <ul>
+              <li class="fragment">Why Aptly?
+              <p class="fragment roll-in">After all, we could have lived without it</p></li>
+              <li class="fragment">Why not Aptly?</li>
+              <li class="fragment">Where to find what
+              <p class="fragment roll-in">Data structures, commands and tests</p></li>
+              <li class="fragment">Set-up your aptly dev environment</li>
+            </ul>
+          </section>
+
+          <section>
+          <h2>Timing</h2>
+            <ul>
+              <li class="fragment">The presentation should take no more than 30 mins</li>
+              <li class="fragment roll-in">if it does, or you don't like it</li>
+              <li class="fragment roll-in">...I will blame...</li>
+            </ul>
+          </section>
+
+          <section>
+          <img src="images/skyscape.png" alt="Skyscape" >
+          </section>
+
+        </section>
+
+        <section data-background="#007777">
+
+          <section>
+            <h1>Introduction to Go!</h1>
+          </section>
+
+          <section>
+          <h2>Where does Go come from?</h2>
+          <ul>
+            <li class="fragment">Three families of programming languages:
+            <p class="fragment">Procedural languages: Assembly, C, Basic</p>
+            <p class="fragment">Object Oriented languages: Java, C++, C#, Visual Basic</p>
+            <p class="fragment">Scripting languages: Ruby, Python, Perl</p>
+          </ul>
+          </section>
+
+          <section>
+          <h2>Procedural languages</h2>
+          <ul>
+            <li class="fragment">Total/Partial hardware control</li>
+            <li class="fragment">Good for performance, extremely fast</li>
+            <li class="fragment">Have you tried to build complex applications in Assembly?</li>
+            <li class="fragment">Unsuitable for modern daily use</li>
+            <li class="fragment">We don't need that much control, do we?</li>
+          </ul>
+          <br><br>
+          <h3><b class="fragment">Fast, hardware control, but not for daily use</b></h3>
+          </section>
+
+          <section>
+          <h2>Object oriented languages</h2>
+          <ul>
+            <li class="fragment">Efficient and robust</li>
+            <li class="fragment">Reuse your code everywhere</li>
+            <li class="fragment">Very verbose (not really readable)</li>
+            <li class="fragment">Difficult to understand what they actually do</li>
+          </ul>
+          <br><br>
+          <h3><b class="fragment">Efficient, robust but verbose and complex</b></h3>
+          </section>
+
+          <section>
+          <h2>Scripting languages</h2>
+          <ul>
+            <li class="fragment">Easy to use (essence of word Pythonic)</li>
+            <li class="fragment">Readability (Google)</li>
+            <li class="fragment">Don't scale very well (Parallelism?)</li>
+            <li class="fragment">Run line by line, compile errors appear at runtime</li>
+          </ul>
+          <br><br>
+          <h3><b class="fragment">Easy, readable but slow and unreliable</b></h3>
+          </section>
+
+          <section>
+          <h2>Go-on-Paper</h2>
+          <ul>
+            <li class="fragment">Easy to use</li>
+            <li class="fragment">Readable</li>
+            <li class="fragment">Efficient and robust</li>
+            <li class="fragment">Fast and multithreaded</li>
+          </ul>
+          <br><br>
+          <h3><b class="fragment">Comes with free beer and premium wine</b></h3>
+          </section>
+
+          <section data-background="black"> 
+          <h2>Is it that cool?</h2>
+          <img src="images/search_pull_aptly.png" alt="search" >
+          </section>
+
+          <section>
+            <p class="fragment">In all fairness...</p>
+            <p class="fragment">it looks like C to me</p>
+            <p class="fragment">...written by a Python developer</p>
+            <p class="fragment">ehm...</p>
+            <p class="fragment">Not a very sober Python developer!</p>
+          </section>
+      
+          <section>
+          <h2>Go: the post-modern C</h2>
+          <h3 style="color:yellow">The features</h3>
+          <ul>
+            <li class="fragment">Compiles to machine code</li>
+            <li class="fragment">The compiler returns an executable (like gcc)
+            <p class="fragment">which contains all the dependencies</p></li>
+            <li class="fragment">Statically typed
+            <p class="fragment">Type of a variable is determined at compile time</p></li>
+            <li class="fragment">Lightweight syntax (no ; or heavy use of (brackets) )</li>
+            <li class="fragment">Supports concurrency primitives</li>
+          </ul>
+          <br><br>
+            <h3><b class="fragment">More beautiful than C, but not quite like Python</b></h3>
+          </section>
+
+       </section>
+
+       <section data-background="#4d7e65">
+
+          <section>
+            <h1>Introduction to Aptly</h1>
+          </section>
+
+          <section>
+          <h2>Aptly: your favourite repo mgmt sys</h2>
+          <ul>
+            <li class="fragment">Written at the beginning of the year
+            by a group of open-source Russian developers</li>
+            <li class="fragment">Composed by one person: <a href="https://github.com/smira/">Andrey Smirnov</a><br>
+            <b class="fragment grow">smira </b>for the github friends</li>
+            <li class="fragment"><a href="https://github.com/smira/aptly/graphs/contributors">Many people</a> have joined him since then</li>
+            <li class="fragment"><b class="fragment grow">You can be the next!</b></li>
+          </ul>
+          </section>
+
+          <section>
+          <h2>Why Aptly?</h2>
+          <ul>
+            <li class="fragment">Makes it very easy to manage a deb repo (supports rpm now!)</li>
+            <li class="fragment">Command-line based</li>
+            <li class="fragment">Supports on-disk repositories, mirrors and snapshots</li>
+            <li class="fragment">Extremely easy to publish any of these objects</li>
+            <li class="fragment">Also supports built-in HTTP server! (unused)</li>
+          </ul>
+          </section>
+        
+          <section>
+          <h2>Why not Aptly?</h2>
+          <ul>
+            <li class="fragment">Not perfect, lacking of many features</li>
+            <li class="fragment">Buggy</li>
+            <li class="fragment">Good initial effort, but needs many enhancements</li>
+            <li class="fragment">Pulling unversioned packets from snapshots returns random versions</li>
+            <li class="fragment">LevelDB lacks of multi-user support</li>
+            <li class="fragment">We can only upload one artefact to aptly at a time</li>
+          </ul>
+          </section>
+
+          <section>
+          <h2>Where are you, my aptly code?</h2>
+          <ul>
+            <li class="fragment">We are mainly interested in <a href="https://github.com/smira/aptly">two folders</a>:</li>
+            <li class="fragment">cmd &amp; deb</li>
+            <li class="fragment">cmd includes one .go file per command</li>
+            <li class="fragment">deb includes the Go types and methods used by aptly</li>
+            <li class="fragment">These are implemented as .go files</li>
+            <li class="fragment">Unit tests are in <i>deb</i></li>
+            <li class="fragment">Acceptance tests (Python) are in <i>system</i></li>
+          </ul>
+          </section>
+
+        </section>
+
+        <section data-background="#8c4738">
+
+         <section>
+          <h1>Go in Practice</h1>
+         </section>
+
+         <section>
+          <h2>The Go resources</h2>
+          <ul>
+            <li class="fragment">Very good <a href="http://golang.org/">website</a></li>
+            <li class="fragment">Includes an online compiler, downloads and documentation</li>
+            <li class="fragment">Pat</li>
+            <li class="fragment">vim-go <a href=https://github.com/fatih/vim-go>github</a></li>
+          </ul>
+          <br><br>
+          <h3><b class="fragment">In case of emergency use Google</b></h3>
+         </section>
+
+          <section>
+          <h2>Setting up your environment for Go!</h2>
+          <ul>
+            <li class="fragment"><b>apt-get install golang</b> or <a href="http://golang.org/doc/install">download Go for Mac</a></li>
+            <li class="fragment">Don't install from brew! (gom doesn't like it)</li>
+            <li class="fragment">Create your project directories</li>
+            <li class="fragment">Set your $GOPATH</li>
+            <li class="fragment">Start your project</li>
+            <li class="fragment">Compile (go build)</li>
+            <li class="fragment">Run (run exe or go run)</li>
+          </ul>
+          <br><br>
+          <h3><q class="fragment">Have I forgotten anything?</q></h3>
+          <h3><b class="fragment">YES, DEBUG!</b></h3>
+          </section>
+
+
+          <section>
+          <h2>About the $GOPATH</h2>
+          <ul>
+            <li class="fragment">It's used to resolve import statements</li>
+            <li class="fragment">GOPATH looks for Go code</li>
+            <li class="fragment">Points to a directory containing:
+            <p class="fragment">src: Source code</p>
+            <p class="fragment">pkg: Installed package objects (dependencies)</p>
+            <p class="fragment">bin: Holds executables</p>
+            <li class="fragment">Good practice to add bin/ to your PATH</li>
+          </ul>
+          </section>
+
+          <section>
+          <h2>Your first Hello Go!</h2>
+          <pre><code data-trim contenteditable>
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Go!")
+}
+          </code></pre>
+          </section>
+
+          <section>
+          <h2>Variables &amp; Built-in Types</h2>
+          <ul>
+            <li class="fragment">A couple of ways to declare a variable:</li>
+            <li class="fragment"><pre><code data-trim contenteditable>
+a := 3 //This declares an int variable
+            </code></pre></li>
+            <li class="fragment"><pre><code data-trim contenteditable>
+var a int  //This declares a variable of type int too
+a = 3
+            </code></pre></li>
+             <li class="fragment"><pre><code data-trim contenteditable>
+a := int(3) //This declares an int variable too
+            </code></pre></li>
+            <li class="fragment">bool, int, uint, string, float, complex, byte (uint8), rune(int32)</li>
+          </ul>
+          </section>
+
+          <section>
+          <h2>Arrays and Slices</h2>
+          <ul>
+            <li class="fragment">Arrays aren't used in Go because they have fixed sizes</li>
+            <li class="fragment">Python lists in Go are called slices</li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+[]type{Elems}
+          </code></pre></li>
+            <li class="fragment">They can be declared (unspecified sizes) or made of a certain size and capacity</li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+letters := []string{'a','b','c'}
+          </code></pre></li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+letters := make([]string, 3, 3)
+          </code></pre></li>
+          <li class="fragment">The append function is useful to append an element to a slice</li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+append(letters, 'd')
+          </code></pre></li>
+          </ul>
+          </section>
+
+          <section>
+          <h2>Maps</h2>
+          <ul>
+            <li class="fragment">Hash Tables</li>
+            <li class="fragment">Like hashes in Ruby or dict in Python</li>
+            <li class="fragment"><pre><code data-trim contenteditable>
+map[KeyType]ValueType
+            </code></pre></li>
+            <li class="fragment">For example:</li>
+            <li class="fragment"><pre><code data-trim contenteditable>
+ageGDS := map[string]int
+            </code></pre></li>
+            <li class="fragment"><pre><code data-trim contenteditable>
+ageGDS := make(map[string]int)
+            </code></pre></li>
+            <li class="fragment">Just assign value to map once initialised</li>          
+            <li class="fragment"><pre><code data-trim contenteditable>
+ageGDS["simon"] = 26
+            </code></pre></li> 
+          </ul>
+          </section>
+
+          <section>
+          <h2>User-defined Types and Structs</h2>
+          <ul>
+          <li class="fragment">You can create a new type</li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+type myType []int
+          </code></pre></li>
+          <li class="fragment">Or a struct</li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+type person struct {
+  name string
+  no_eyes int
+}
+          </code></pre></li>
+          </ul>
+          </section>
+
+          <section>
+          <h2>Functions &amp; link to Types</h2>
+          <ul>
+            <li class="fragment">A function has got the following format in Go:</li>
+            <li class="fragment"><pre><code data-trim contenteditable>
+func FuncName(params) (variables_to_return) { code }
+          </code></pre></li> 
+            <li class="fragment">For example:</li>
+            <li class="fragment"><pre><code data-trim contenteditable>
+func Add(val1,val2 int) (int) { code }
+          </code></pre></li> 
+            <li class="fragment">In Go everything is passed by value</li>
+            <li class="fragment">If you want to modify the parameter values, then use pointers</li>
+          <li class="fragment">Linking functions to types is just like adding methods to properties in a class</li>
+          <li class="fragment">For example:</li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+func (p person) WhatsYourName() (string) { return p.name }
+            </code></pre></li>
+          </ul>
+          </section>
+
+          <section>
+          <h2>Pointers</h2>
+          <ul>
+            <li class="fragment">Pointers are very scary</li>
+            <li class="fragment">They used to scare me when I was a child</li>
+            <li class="fragment">Had terrible nightmares....</li>
+            <li class="fragment">In reality, a pointer is just a memory address</li>
+            <li class="fragment">Because Go, like C, only passes parameters by value...</li>
+            <li class="fragment">I can retrieve variable values from their memory addresses and modify them!</li>
+            <li class="fragment"><pre><code data-trim contenteditable>
+num := 1
+pointer_to_num := &num // Assigns pointer with memory address of 'variable'
+pointer_to_num == 0x46AFF7362A
+*pointer_to_num == 1 // Star returns value stored at the specified memory address
+          </code></pre></li> 
+          </ul>
+          </section>
+        
+           <section>
+          <h2>Conditional/Iterative statements</h2>
+          <ul>
+            <li class="fragment">Just like C, we have if statements</li>
+            <li class="fragment">for loops replace while loops</li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+if condition {
+} else {
+}
+          </code></pre></li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+for control_statement {
+}
+for i:=0; i<10; i++ {
+}
+for{
+// loop forever 
+}
+          </code></pre></li>
+          </ul>
+          </section>
+      
+          <section>
+          <h2>Interfaces</h2>
+          <ul>
+          <li class="fragment">Interfaces are used to define the behaviour of a type (Polymorphism)</li>
+          <li class="fragment">Interfaces can be implemented by multiple types</li>
+          <li class="fragment">In Go, we don't specify which method implements which interface.</li>
+          <li class="fragment">The declaration is implicit (not like in Java)</li>
+          <li class="fragment"><pre><code data-trim contenteditable>
+type Shaper interface {
+  Area () int
+}
+            </code></pre></li> 
+          </section>
+
+          <section>
+          <h1>Demo time!</h1>
+          </section>
+
+
+        </section>
+
+        <section data-background="purple">
+          <section>
+          <h1>Aptly in practice</h1>
+          </section>
+
+          <section>
+          <h2><b class="fragment">Bulding your aptly environment</b></h2>
+          <h3><b class="fragment">And get you ready to develop new features</b></h3>
+          </section>
+
+          <section>
+          <h1>Demo time!</h1>
+          </section>
+
+        </section>
+
+        <section>
+        <h1>That's all folks!</h1>
+        <h2><b class="fragment">Any questions?</b></h2>
+        <h3><b class="fragment">Pat will be happy to answer them!</b></h3>
+        </section>
+
+
+      </div>
+    </div> 
+    
+    <script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
